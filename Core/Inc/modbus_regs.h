@@ -92,13 +92,14 @@
 #define REG_STOP_CALIBRATION            0x0038  // Stop calibration command (write 1 to stop calibration)
 #define REG_CALIBRATION_STATUS          0x0039  // Calibration status (bit field)
 #define REG_CALIBRATION_ERROR           0x003A  // Calibration error (global error code)
+#define REG_RESERVED_3B                 0x003B  // Reserved (dummy for continuous read)
 
 // System Registers
 #define REG_DEVICE_ID         0x0100  // Device ID (Modbus slave address)
 #define REG_CONFIG_BAUDRATE   0x0101  // Config baudrate (1=9600, 2=19200, 3=38400,...)
 #define REG_CONFIG_PARITY     0x0102  // Config parity (0=None, 1=Even, 2=Odd)
 #define REG_CONFIG_STOP_BITS  0x0103  // Config stop bits (1=1, 2=2)
-#define REG_MODULE_TYPE       0x0104  // Module type (0x0002 = Power Module)
+#define REG_MODULE_TYPE       0x0104  // Module type (0x0007 = Cargo control Module)
 #define REG_FIRMWARE_VERSION  0x0105  // Firmware version (e.g. 0x0101 = v1.01)
 #define REG_HARDWARE_VERSION  0x0106  // Hardware version (e.g. 0x0101 = v1.01)
 #define REG_SYSTEM_STATUS     0x0107  // System status (bit field)

@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "modbus_rtu.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -75,6 +75,21 @@ const osThreadAttr_t uarrt3RxTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for modbusQueue */
+osMessageQueueId_t modbusQueueHandle;
+const osMessageQueueAttr_t modbusQueue_attributes = {
+  .name = "modbusQueue"
+};
+/* Definitions for uart3RQueue */
+osMessageQueueId_t uart3RQueueHandle;
+const osMessageQueueAttr_t uart3RQueue_attributes = {
+  .name = "uart3RQueue"
+};
+/* Definitions for modbusMutex */
+osMutexId_t modbusMutexHandle;
+const osMutexAttr_t modbusMutex_attributes = {
+  .name = "modbusMutex"
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -95,8 +110,11 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
-
+  Modbus_Init();
   /* USER CODE END Init */
+  /* Create the mutex(es) */
+  /* creation of modbusMutex */
+  modbusMutexHandle = osMutexNew(&modbusMutex_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -109,6 +127,13 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_TIMERS */
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
+
+  /* Create the queue(s) */
+  /* creation of modbusQueue */
+  modbusQueueHandle = osMessageQueueNew (10, sizeof(uint16_t), &modbusQueue_attributes);
+
+  /* creation of uart3RQueue */
+  uart3RQueueHandle = osMessageQueueNew (10, sizeof(uint16_t), &uart3RQueue_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -165,11 +190,8 @@ void StartMotorTask(void *argument)
 void StartMosbusTask(void *argument)
 {
   /* USER CODE BEGIN StartMosbusTask */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
+  // Gọi Modbus Task (infinite loop bên trong)
+  Modbus_Task(argument);
   /* USER CODE END StartMosbusTask */
 }
 
@@ -186,7 +208,8 @@ void StartLedAndRelayTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+    osDelay(200);
   }
   /* USER CODE END StartLedAndRelayTask */
 }

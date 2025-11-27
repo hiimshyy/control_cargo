@@ -57,16 +57,12 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define ECB1_Pin GPIO_PIN_1
-#define ECB1_GPIO_Port GPIOA
+#define LED_Pin GPIO_PIN_13
+#define LED_GPIO_Port GPIOC
 #define DIR_4_Pin GPIO_PIN_4
 #define DIR_4_GPIO_Port GPIOA
 #define DIR_3_Pin GPIO_PIN_5
 #define DIR_3_GPIO_Port GPIOA
-#define EN_MT2_Pin GPIO_PIN_6
-#define EN_MT2_GPIO_Port GPIOA
-#define EN_MT1_Pin GPIO_PIN_7
-#define EN_MT1_GPIO_Port GPIOA
 #define DIR_2_Pin GPIO_PIN_0
 #define DIR_2_GPIO_Port GPIOB
 #define DIR_1_Pin GPIO_PIN_1
@@ -81,13 +77,34 @@ void Error_Handler(void);
 #define INP1_GPIO_Port GPIOB
 #define FAULT_OUT_Pin GPIO_PIN_8
 #define FAULT_OUT_GPIO_Port GPIOA
-#define ECA2_Pin GPIO_PIN_6
-#define ECA2_GPIO_Port GPIOB
-#define ECB2_Pin GPIO_PIN_7
-#define ECB2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+// Error codes
+typedef enum {
+    ERROR_NONE = 0,
+    ERROR_MOTOR_STALL,
+    ERROR_SENSOR_FAILURE,
+    ERROR_COMMUNICATION,
+    ERROR_OVERLOAD
+} ErrorCode_t;
 
+// Door states
+typedef enum {
+    DOOR_UNKNOWN = 0,
+    DOOR_CLOSED,
+    DOOR_OPEN,
+    DOOR_OPENING,
+    DOOR_CLOSING,
+    DOOR_INTERMEDIATE
+} DoorState_t;
+
+// Motor commands
+typedef enum {
+    CMD_STOP = 0,
+    CMD_OPEN,
+    CMD_CLOSE,
+    CMD_CALIBRATE
+} MotorCommand_t;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

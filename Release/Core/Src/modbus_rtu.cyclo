@@ -1,0 +1,13 @@
+../Core/Src/modbus_rtu.c:613:12:Modbus_IsRegisterWritable	5
+../Core/Src/modbus_rtu.c:46:6:Modbus_Init	1
+../Core/Src/modbus_rtu.c:442:6:Modbus_SendResponse	2
+../Core/Src/modbus_rtu.c:470:5:Modbus_ReadRegister	3
+../Core/Src/modbus_rtu.c:486:5:Modbus_WriteRegister	3
+../Core/Src/modbus_rtu.c:665:10:Modbus_CRC16	3
+../Core/Src/modbus_rtu.c:420:6:Modbus_SendException	1
+../Core/Src/modbus_rtu.c:250:13:Modbus_HandleReadInputRegisters.isra	5
+../Core/Src/modbus_rtu.c:190:13:Modbus_HandleReadHoldingRegisters.isra	5
+../Core/Src/modbus_rtu.c:694:13:Modbus_OnRegisterWrite	3
+../Core/Src/modbus_rtu.c:136:6:Modbus_ProcessFrame	18
+../Core/Src/modbus_rtu.c:84:6:Modbus_Task	6
+../Core/Src/modbus_rtu.c:751:6:HAL_UART_RxCpltCallback	3
