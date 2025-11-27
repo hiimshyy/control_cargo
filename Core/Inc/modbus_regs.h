@@ -17,7 +17,7 @@
 // Object Detection (0x0004)
 #define REG_OBJECT_DETECTION     		0x0004  // Object detection status
 
-// Motor 1 Status (0x0005-0x000F)
+// Motor 1 Status (0x0005-0x000C)
 #define REG_MOTOR1_POSITION_ABS         0x0005  // Motor 1 absolute position
 #define REG_MOTOR1_POSITION_REL         0x0006  // Motor 1 relative position
 #define REG_MOTOR1_CURRENT_SPEED        0x0007  // Motor 1 current speed RPM
